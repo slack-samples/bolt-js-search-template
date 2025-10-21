@@ -1,7 +1,7 @@
 {
 	"name": "bolt-js-search-template",
 	"version": "1.0.0",
-	"description": "A template for implementing enterprise search in Bolt for node",
+	"description": "A template for implementing enterprise search in Bolt for JavaScript",
 	"type": "module",
 	"main": "app.js",
 	"scripts": {
