@@ -56,7 +56,7 @@ slack run
 
 Before you can run the app, you'll need to store some environment variables.
 
-1. Copy `env.sample` to `.env`
+1. Copy `.env.sample` to `.env`
 2. Open your apps configuration page from [this list](https://api.slack.com/apps), click _OAuth & Permissions_ in the left hand menu, then copy the _Bot User OAuth Token_ into your `.env` file under `SLACK_BOT_TOKEN`
 3. Click _Basic Information_ from the left hand menu and follow the steps in the _App-Level Tokens_ section to create an app-level token with the `connections:write` scope. Copy that token into your `.env` as `SLACK_APP_TOKEN`.
 
