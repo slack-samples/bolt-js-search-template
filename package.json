@@ -9,7 +9,7 @@
 		"lint": "npx @biomejs/biome check *.js listeners",
 		"lint:fix": "npx @biomejs/biome check --write *.js listeners tests",
 		"start": "node app.js",
-		"test": "node --test tests/**/*.test.js"
+		"test": "node --test"
 	},
 	"author": "Slack Technologies, LLC",
 	"license": "MIT",

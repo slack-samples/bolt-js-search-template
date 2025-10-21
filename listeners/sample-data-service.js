@@ -8,12 +8,14 @@ export class SlackResponseError extends Error {
 }
 
 export const SampleDataService = {
-  fetchSampleData: async ({ client, query, filters, logger }) => {
+  API_METHOD: 'developer.sampleData.get',
+
+  fetchSampleData: async ({ client, query = null, filters = null, logger }) => {
     const options = {
       ...(query && { query }),
     };
     if (filters) {
-      const selectedFilters = {}
+      const selectedFilters = {};
       const languages = filters[LANGUAGES_FILTER.name];
       const templates = filters[TEMPLATES_FILTER.name] ?? false;
       const samples = filters[SAMPLES_FILTER.name] ?? false;
@@ -30,12 +32,12 @@ export const SampleDataService = {
         }
       }
 
-      if (Object.keys(selectedFilters).length > 0) {
+      if (Object.entries(selectedFilters).length > 0) {
         options.filters = selectedFilters;
       }
     }
 
-    const response = await client.apiCall('developer.sampleData.get', options);
+    const response = await client.apiCall(SampleDataService.API_METHOD, options);
 
     if (!response.ok) {
       logger.error(`Search API request failed with error: ${response.error}`);

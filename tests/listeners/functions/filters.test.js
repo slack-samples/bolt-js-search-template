@@ -53,17 +53,17 @@ describe('filtersCallback', () => {
       ],
     });
 
-    const templatesFilter = completeCallArgs.outputs.filters.find((f) => f.name === 'templates');
+    const templatesFilter = completeCallArgs.outputs.filters.find((f) => f.name === 'template');
     assert.deepStrictEqual(templatesFilter, {
-      name: 'templates',
       display_name: 'Templates',
+      name: 'template',
       type: 'toggle',
     });
 
-    const samplesFilter = completeCallArgs.outputs.filters.find((f) => f.name === 'samples');
+    const samplesFilter = completeCallArgs.outputs.filters.find((f) => f.name === 'sample');
     assert.deepStrictEqual(samplesFilter, {
-      name: 'samples',
       display_name: 'Samples',
+      name: 'sample',
       type: 'toggle',
     });
 

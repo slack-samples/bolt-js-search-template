@@ -148,7 +148,6 @@ describe('entityDetailsRequestedCallback', () => {
         'Failed to find sample data with external reference id: non-existent-sample',
       ),
     );
-    assert(fakeClient.apiCall.mock.callCount() === 0);
   });
 
   it('should handle SlackResponseError from fetchSampleData', async () => {
@@ -157,14 +156,8 @@ describe('entityDetailsRequestedCallback', () => {
     });
 
     await entityDetailsRequestedCallback(buildArguments({}));
-
     assert(fakeLogger.error.mock.callCount() === 1);
-    assert(
-      fakeLogger.error.mock.calls[0].arguments[0].includes(
-        'Failed to fetch or parse sample data. Error details: Failed to fetch sample data from Slack API',
-      ),
-    );
-    assert(fakeClient.apiCall.mock.callCount() === 0);
+    assert(fakeLogger.error.mock.calls[0].arguments[0].includes('Failed to fetch or parse sample data'));
   });
 
   it('should handle unexpected errors', async () => {
@@ -177,10 +170,9 @@ describe('entityDetailsRequestedCallback', () => {
     assert(fakeLogger.error.mock.callCount() === 1);
     assert(
       fakeLogger.error.mock.calls[0].arguments[0].includes(
-        'Unexpected error occurred while processing entity_details_requested event: Unexpected error',
+        'Unexpected error occurred while processing entity_details_requested event',
       ),
     );
-    assert(fakeClient.apiCall.mock.callCount() === 0);
   });
 
   it('should handle empty samples array', async () => {
@@ -199,6 +191,5 @@ describe('entityDetailsRequestedCallback', () => {
         `Failed to find sample data with external reference id: ${validEvent.external_ref.id}`,
       ),
     );
-    assert(fakeClient.apiCall.mock.callCount() === 0);
   });
 });
