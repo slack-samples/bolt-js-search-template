@@ -31,12 +31,6 @@ slack create bolt-js-search --template slack-samples/bolt-js-search-template
 cd bolt-js-search
 ```
 
-#### Creating the Slack app
-
-```sh
-slack install
-```
-
 #### Running the app
 
 ```sh
