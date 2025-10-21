@@ -43,7 +43,8 @@ describe('filtersCallback', () => {
     const languagesFilter = completeCallArgs.outputs.filters.find((f) => f.name === 'languages');
     assert.deepStrictEqual(languagesFilter, {
       name: 'languages',
-      display_name: 'Languages',
+      display_name: 'Language',
+      display_name_plural: 'Languages',
       type: 'multi_select',
       options: [
         { name: 'Python', value: 'python' },

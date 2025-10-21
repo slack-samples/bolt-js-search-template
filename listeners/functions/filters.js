@@ -5,7 +5,8 @@ const FilterService = {
 
 export const LANGUAGES_FILTER = {
   name: 'languages',
-  display_name: 'Languages',
+  display_name: 'Language',
+  display_name_plural: 'Languages',
   type: 'multi_select',
   options: [
     { name: 'Python', value: 'python' },
