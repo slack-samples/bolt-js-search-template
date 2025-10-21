@@ -6,7 +6,7 @@
 	"main": "app.js",
 	"scripts": {
 		"dev": "node --watch app.js",
-		"lint": "npx @biomejs/biome check *.js listeners",
+		"lint": "npx @biomejs/biome check *.js listeners tests",
 		"lint:fix": "npx @biomejs/biome check --write *.js listeners tests",
 		"start": "node app.js",
 		"test": "node --test"
