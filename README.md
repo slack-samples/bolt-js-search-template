@@ -72,7 +72,7 @@ Before you can run the app, you'll need to store some environment variables.
 
 ## Testing
 
-Run the TypeScript compilation, code linting and tests:
+Run the code linting and tests:
 
 ```sh
 npm test
