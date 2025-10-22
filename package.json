@@ -30,7 +30,7 @@
 		"dotenv": "~17.2.3"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.2.4",
+		"@biomejs/biome": "^2.2.7",
 		"@slack/cli-hooks": "^1.2.1"
 	}
 }
