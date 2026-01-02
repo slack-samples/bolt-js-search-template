@@ -54,7 +54,7 @@ describe('searchCallback', () => {
     assert(fakeComplete.mock.callCount() === 1);
     const completeCallArgs = fakeComplete.mock.calls[0].arguments[0];
     assert(completeCallArgs.outputs);
-    assert(Array.isArray(completeCallArgs.outputs.search_result));
+    assert(Array.isArray(completeCallArgs.outputs.search_results));
 
     assert(fakeAck.mock.callCount() === 1);
     assert(fakeFail.mock.callCount() === 0);
