@@ -14,7 +14,7 @@ async function searchCallback({ ack, inputs, fail, complete, client, logger }) {
 
     await complete({
       outputs: {
-        search_result: response.samples,
+        search_results: response.samples,
       },
     });
   } catch (error) {
