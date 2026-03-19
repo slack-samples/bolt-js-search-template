@@ -8,14 +8,14 @@
             "always_online": true
         },
         "rich_previews": {
+            "is_active": true,
             "entity_types": [
                 "slack#/entities/item"
             ]
         },
         "search": {
             "search_function_callback_id": "search",
-            "search_filters_function_callback_id": "filters",
-            "enable_ai_answers": true
+            "search_filters_function_callback_id": "filters"
         }
     },
     "oauth_config": {
@@ -91,12 +91,12 @@
                 }
             },
             "output_parameters": {
-                "search_result": {
+                "search_results": {
                     "type": "slack#/types/search_results",
                     "title": "Search Result",
                     "description": "An array containing the search results based on the inputs",
                     "is_required": true,
-                    "name": "search_result"
+                    "name": "search_results"
                 }
             }
         }

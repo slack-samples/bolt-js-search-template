@@ -1,7 +1,5 @@
 # Bolt for JavaScript Search Template
 
-> ⚠️ **Beta Notice**: This template demonstrates search functionality that is currently in beta and not yet widely available to all developers. The features shown here are being tested and may change before general availability.
-
 This is a Slack app template for building search functionality using Bolt for Node. It demonstrates how to create custom functions for search and filtering capabilities.
 
 It's recommended to use a [developer sandbox](https://docs.slack.dev/tools/developer-sandboxes/) for development and testing. Other workspaces may not have access to all these features. To get started:
@@ -29,6 +27,12 @@ slack login
 ```sh
 slack create bolt-js-search --template slack-samples/bolt-js-search-template
 cd bolt-js-search
+```
+
+#### Creating the Slack app
+
+```sh
+slack install
 ```
 
 #### Running the app
@@ -63,6 +67,14 @@ Before you can run the app, you'll need to store some environment variables.
 `npm start`
 
 </details>
+
+## Usage in Slack
+
+Even after apps that use Enterprise Search features are installed at the org level, they are not immediately available to end users or app collaborators by default.
+
+See [this page](https://docs.slack.dev/enterprise-search/enterprise-search-access-control) of the developer docs for more details, or jump straight to the Slack Help Center to [see the steps](https://slack.com/help/articles/39044407124755-Set-up-and-manage-Slack-enterprise-search#enable-or-disable-enterprise-search) an org owner or org admin needs to take to enable your app's search function as a data source.
+
+[Start a search](https://slack.com/help/articles/38693462131219-Search-across-your-applications-with-enterprise-search#start-a-search) to see `function_executed` event payloads sent to your app. Use the data source filter to only show matching results returned by your app.
 
 ## Testing
 
