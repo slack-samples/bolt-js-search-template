@@ -43,4 +43,4 @@ async function filtersCallback({ ack, inputs, fail, complete, logger }) {
   }
 }
 
-export { filtersCallback, FilterService };
+export { FilterService, filtersCallback };
