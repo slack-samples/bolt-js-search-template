@@ -29,4 +29,4 @@ async function searchCallback({ ack, inputs, fail, complete, client, logger }) {
   }
 }
 
-export { searchCallback, SearchService };
+export { SearchService, searchCallback };
