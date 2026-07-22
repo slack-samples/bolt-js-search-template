@@ -1,8 +1,9 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it, mock } from 'node:test';
+import { WebAPIPlatformError } from '@slack/web-api';
 
 import { SearchService, searchCallback } from '../../../listeners/functions/search.js';
-import { SampleDataService, SlackResponseError } from '../../../listeners/sample-data-service.js';
+import { SampleDataService } from '../../../listeners/sample-data-service.js';
 import { fakeAck, fakeClient, fakeComplete, fakeFail, fakeLogger, fakeSlackResponse } from '../../helpers.js';
 
 const validInputs = {
@@ -49,7 +50,6 @@ describe('searchCallback', () => {
       client: fakeClient,
       query: validInputs.query,
       filters: validInputs.filters,
-      logger: fakeLogger,
     });
     assert(fakeComplete.mock.callCount() === 1);
     const completeCallArgs = fakeComplete.mock.calls[0].arguments[0];
@@ -60,15 +60,15 @@ describe('searchCallback', () => {
     assert(fakeFail.mock.callCount() === 0);
   });
 
-  it('should handle SlackResponseError from fetchSampleData', async () => {
+  it('should handle SlackError from fetchSampleData', async () => {
     mockFetchSampleData.mock.mockImplementation(() => {
-      throw new SlackResponseError('Failed to fetch sample data from Slack API');
+      throw new WebAPIPlatformError({ ok: false, error: 'invalid_auth' });
     });
 
     await searchCallback(buildArguments({}));
 
     assert(fakeLogger.error.mock.callCount() === 1);
-    assert(fakeLogger.error.mock.calls[0].arguments[0].includes('Failed to fetch or parse sample data'));
+    assert(fakeLogger.error.mock.calls[0].arguments[0].includes('Slack API call failed with error code'));
     assert(fakeFail.mock.callCount() === 1);
     assert.deepStrictEqual(fakeFail.mock.calls[0].arguments[0], {
       error: SearchService.SEARCH_PROCESSING_ERROR_MSG,

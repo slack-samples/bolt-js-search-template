@@ -1,16 +1,9 @@
 import { LANGUAGES_FILTER, SAMPLES_FILTER, TEMPLATES_FILTER } from './functions/filters.js';
 
-export class SlackResponseError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = 'SlackResponseError';
-  }
-}
-
 export const SampleDataService = {
   API_METHOD: 'developer.sampleData.get',
 
-  fetchSampleData: async ({ client, query = null, filters = null, logger }) => {
+  fetchSampleData: async ({ client, query = null, filters = null }) => {
     const options = {
       ...(query && { query }),
     };
@@ -38,11 +31,6 @@ export const SampleDataService = {
     }
 
     const response = await client.apiCall(SampleDataService.API_METHOD, options);
-
-    if (!response.ok) {
-      logger.error(`Search API request failed with error: ${response.error}`);
-      throw new SlackResponseError('Failed to fetch sample data from Slack API');
-    }
 
     return response;
   },
