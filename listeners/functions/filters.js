@@ -1,3 +1,5 @@
+import { SlackError } from '@slack/web-api';
+
 const FilterService = {
   FILTER_PROCESSING_ERROR_MSG:
     'We encountered an issue processing filter results. Please try again or contact the app owner if the problem persists.',
@@ -35,7 +37,11 @@ async function filtersCallback({ ack, inputs, fail, complete, logger }) {
 
     await complete({ outputs: { filters: [LANGUAGES_FILTER, TEMPLATES_FILTER, SAMPLES_FILTER] } });
   } catch (error) {
-    logger.error('Unexpected error occurred while processing filters request', error);
+    if (error instanceof SlackError) {
+      logger.error(`Slack API call failed with error code ${error.code}. Check error details below:`, error);
+    } else {
+      logger.error('Unexpected error occurred while processing filters request', error);
+    }
 
     await fail({ error: FilterService.FILTER_PROCESSING_ERROR_MSG });
   } finally {

@@ -1,7 +1,8 @@
 import assert from 'node:assert';
 import { beforeEach, describe, it, mock } from 'node:test';
+import { WebAPIPlatformError } from '@slack/web-api';
 import { entityDetailsRequestedCallback } from '../../../listeners/events/entity-details-requested.js';
-import { SampleDataService, SlackResponseError } from '../../../listeners/sample-data-service.js';
+import { SampleDataService } from '../../../listeners/sample-data-service.js';
 import { fakeClient, fakeLogger, fakeSampleData, fakeSlackResponse } from '../../helpers.js';
 
 const validEvent = {
@@ -150,14 +151,14 @@ describe('entityDetailsRequestedCallback', () => {
     );
   });
 
-  it('should handle SlackResponseError from fetchSampleData', async () => {
+  it('should handle SlackError from fetchSampleData', async () => {
     mockFetchSampleData.mock.mockImplementation(() => {
-      throw new SlackResponseError('Failed to fetch sample data from Slack API');
+      throw new WebAPIPlatformError({ ok: false, error: 'invalid_auth' });
     });
 
     await entityDetailsRequestedCallback(buildArguments({}));
     assert(fakeLogger.error.mock.callCount() === 1);
-    assert(fakeLogger.error.mock.calls[0].arguments[0].includes('Failed to fetch or parse sample data'));
+    assert(fakeLogger.error.mock.calls[0].arguments[0].includes('Slack API call failed with error code'));
   });
 
   it('should handle unexpected errors', async () => {

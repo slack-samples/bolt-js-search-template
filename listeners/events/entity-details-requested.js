@@ -1,8 +1,9 @@
-import { SampleDataService, SlackResponseError } from '../sample-data-service.js';
+import { SlackError } from '@slack/web-api';
+import { SampleDataService } from '../sample-data-service.js';
 
 async function entityDetailsRequestedCallback({ client, event, logger }) {
   try {
-    const response = await SampleDataService.fetchSampleData({ client, logger });
+    const response = await SampleDataService.fetchSampleData({ client });
 
     const sample = response.samples.find((sample) => sample.external_ref.id === event.external_ref.id);
     if (sample === undefined) {
@@ -56,8 +57,8 @@ async function entityDetailsRequestedCallback({ client, event, logger }) {
       },
     });
   } catch (error) {
-    if (error instanceof SlackResponseError) {
-      logger.error('Failed to fetch or parse sample data', error);
+    if (error instanceof SlackError) {
+      logger.error(`Slack API call failed with error code ${error.code}. Check error details below:`, error);
     } else {
       logger.error('Unexpected error occurred while processing entity_details_requested event', error);
     }
